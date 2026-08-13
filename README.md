@@ -8,10 +8,10 @@ I build reliability-focused systems in Rust, TypeScript, and Python, and applied
 
 ## 🔧 Featured Projects
 
-### [LeetCode Widget Board](https://github.com/pes1ug23am910/leetcode-widget-board)
-> Local-first, gently-gamified Windows 11 desktop companion for LeetCode / NeetCode-150 — 15 Fluent-styled Electron widgets (coins, awards, journal) fed live from your LeetCode account by a Python data pipeline. Sandboxed, context-isolated renderers with identity-gated IPC and allow-listed navigation; atomic file persistence with corrupt-state preservation and rollback.
+### [micro-raft](https://github.com/pes1ug23am910/micro-raft)
+> Raft consensus implemented from scratch in Rust — no consensus libraries of any kind — as a 3-node key-value store over TCP. Leader election, log replication with conflict-only repair, and the Figure-8 current-term commit rule, over durable storage with atomic hard-state swap and torn-tail recovery. The consensus core is I/O-free, so identical code runs against real sockets and against a virtual network.
 >
-> `Electron` `Node.js` `Python` `Win32` — **288 automated tests, green CI**, hardened via an independent cold-read security audit
+> `Rust` `Cargo workspace` `TCP` — deterministic virtual-time simulator asserting Election Safety / Log Matching / State Machine Safety after **every** step; failures replay from their seed
 
 ### [Factuality-First RAG](https://github.com/pes1ug23am910/Factuality-First-RAG)
 > Adaptive retrieval-augmented generation: a zero-cost logit/entropy probe decides *when* to retrieve, RoBERTa-large-NLI scores passages, and hybrid FAISS-HNSW + BM25 retrieval runs over a 545k-passage index. 4-bit quantised Mistral-7B inference; claim-level provenance evaluation (FactScore-style).
