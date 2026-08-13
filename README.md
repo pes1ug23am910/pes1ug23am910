@@ -18,11 +18,6 @@ I build reliability-focused systems in Rust, TypeScript, and Python, and applied
 >
 > `Python` `Mistral-7B` `FAISS` `RoBERTa-NLI` `BM25` — pytest + ruff + mypy via GitHub Actions
 
-### [Why VLMs Fail on Indic Memes](https://github.com/pes1ug23am910/Indic_VLM_Taxonomy)
-> First-author, pre-registered study (OSF, Apr 2026): an 8-stage evaluation pipeline over a 109-meme Hindi–English code-mixed benchmark. **88.5%** (95% CI 80–95) of GPT-4o and Gemini-2.5-Flash errors trace to missing cultural knowledge — model-invariant. Manuscript in preparation.
->
-> `Python` `Multi-VLM harness` `Pre-registration` `Bootstrap CIs`
-
 ### [StudyBuddy AI](https://github.com/pes1ug23am910/study-buddy-final)
 > Multi-agent tutoring system on Google ADK + Gemini 2.0 Flash: one orchestrator + 5 specialist agents + 3 validator loop-agents routing tutoring, study planning, adaptive quizzing, and progress analytics. 7-stage adaptive spaced repetition (Ebbinghaus curve) with JSON-based cross-session continuity.
 >
