@@ -28,15 +28,15 @@ I build reliability-focused systems in Rust, TypeScript, and Python, and applied
 >
 > `Python` `Google ADK` `Gemini 2.0 Flash` `asyncio`
 
-### [FocusMe](https://github.com/pes1ug23am910/FOCUSME_DUMMY)
-> Cross-platform focus-enforcement system in Rust — Windows (WFP) backend implemented and end-to-end tested, remaining backends in progress (status matrix in repo). SQLCipher-encrypted policy store; Axum backend with JWT auth and multi-device policy sync.
+### [LocalDocForge](https://github.com/pes1ug23am910/LocalDocForge)
+> Privacy-first local document processing — a typed Python core library, Typer CLI, and a token-authenticated loopback FastAPI service with Job-Object-contained workers. Structural and render validation before atomic, collision-safe publication; hash-locked dependency profiles and a reproducible-build gate. Also ships an MCP server so local agents can call it instead of hand-rolling conversion code.
 >
-> `Rust` `Tauri` `React` `TypeScript` `Axum` `PostgreSQL`
+> `Python` `FastAPI` `Typer` `pikepdf` `PDFium` — 639-outcome test suite (636 passed, 3 documented platform skips at the last gated merge), ruff + mypy, release-gated
 
 ## 🧪 Also building (private / local for now)
 
 - **ASCEND** — hybrid event-log/cached-projection desktop productivity RPG (Rust, Tauri 2, React, TypeScript): 11 replayable gameplay/economy projections rebuild from the append-only event log; core economy mutations pair cache and event writes in one SQLite transaction, with compensating transactional undo. **456 automated tests** (327 Rust + 129 Vitest).
-- **LocalDocForge** — privacy-first local document processing: typed Python core library, Typer CLI, and a token-authenticated loopback FastAPI service with Job-Object-contained workers. 639-outcome test suite (636 passed, 3 documented platform skips at the last gated merge); hash-locked dependency profiles; reproducible-build gate.
+- **FocusMe** — cross-platform focus-enforcement system in Rust: Windows (WFP) backend implemented and end-to-end tested, remaining backends in progress. SQLCipher-encrypted policy store; Axum backend with JWT auth and multi-device policy sync.
 - **PromptGFM-Bio** — prompt-conditioned graph model for rare-disease gene ranking (PyTorch Geometric, frozen PubMedBERT, FiLM conditioning); manuscript in preparation.
 - **UI-Migration Capstone (Lead)** — React Native → Kotlin via a typed intermediate representation, with CodeT5+ (220M ×2) encoders; frozen-instrument exact-match reconstruction rose 17.8% → 85.6% across model versions.
 
