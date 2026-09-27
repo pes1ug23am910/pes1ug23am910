@@ -1,72 +1,78 @@
 # Hi, I'm Yash Verma 👋
 
-**Final-year B.Tech — Computer Science (AI-ML)** @ PES University, Bengaluru (2023–2027) · **CGPA 8.96/10**, merit scholarship every semester to date
+**Final-year B.Tech — Computer Science (AI-ML)** @ PES University, Bengaluru (2023–2027) · **CGPA 8.96/10** · merit scholarships, Semesters 1–5
 
-I build reliability-focused systems in Rust, TypeScript, and Python, and applied-ML systems end to end — with real test suites, CI, and honest status reporting. Co-author + **Best Presenter, ICCEE 2026**; first-author NLP study in preparation. Seeking SDE / backend / systems and AI-ML internships and 2027 new-grad roles.
+I build systems with real test suites and CI, and say plainly what they don't do yet: consensus in Rust, Wi-Fi capture tooling in C, local-first Python services, and evaluation harnesses for ML and LLM systems. Second author of a paper published in the ICCEE 2026 proceedings (Best Presentation award); first-author study on vision-language models in preparation. Seeking SDE / systems / test-engineering and AI-ML internships and 2027 new-grad roles.
 
 ---
 
-## 🔧 Featured Projects
+## 🔧 Featured projects
 
-### [micro-raft](https://github.com/pes1ug23am910/micro-raft)
-> Raft consensus implemented from scratch in Rust — no consensus libraries of any kind — as a 3-node key-value store over TCP. Leader election, log replication with conflict-only repair, and the Figure-8 current-term commit rule, over durable storage with atomic hard-state swap and torn-tail recovery. The consensus core is I/O-free, so identical code runs against real sockets and against a virtual network.
+### [airtrace](https://github.com/pes1ug23am910/airtrace) — 802.11 capture parser and Wi-Fi fault lab
+> An allocation-free, bounds-checked C11 parser for pcap/radiotap Wi-Fi captures: 802.11 MAC headers, association/probe/beacon/authentication frames and tagged IEs, status and reason codes, and EAPOL 4-way handshake message classification, with JSONL and statistics output. Verified with 92 unit tests and golden tests checking all 2,273 frames of two public captures against tshark; fuzzed with libFuzzer under ASan/UBSan.
 >
-> `Rust` `Cargo workspace` `TCP` — deterministic virtual-time simulator asserting Election Safety / Log Matching / State Machine Safety after **every** step; failures replay from their seed
-
-### [Factuality-First RAG](https://github.com/pes1ug23am910/Factuality-First-RAG)
-> Adaptive retrieval-augmented generation: a zero-cost logit/entropy probe decides *when* to retrieve, RoBERTa-large-NLI scores passages, and hybrid FAISS-HNSW + BM25 retrieval runs over a 545k-passage index. 4-bit quantised Mistral-7B inference; claim-level provenance evaluation (FactScore-style).
+> v0.2 adds a Linux `mac80211_hwsim` fault lab (hostapd, wpa_supplicant) that generates labelled connection failures, and an evaluation harness comparing rule-based and LLM triage with frozen test settings and paired statistics. The harness is tested offline; no model results are published yet.
 >
-> `Python` `Mistral-7B` `FAISS` `RoBERTa-NLI` `BM25` — pytest + ruff + mypy via GitHub Actions
+> `C11` `radiotap` `libFuzzer` `ASan/UBSan` `Python` `hostapd` `wpa_supplicant`
 
-### [StudyBuddy AI](https://github.com/pes1ug23am910/study-buddy-final)
-> Multi-agent tutoring system on Google ADK + Gemini 2.0 Flash: one orchestrator + 5 specialist agents + 3 validator loop-agents routing tutoring, study planning, adaptive quizzing, and progress analytics. 7-stage adaptive spaced repetition (Ebbinghaus curve) with JSON-based cross-session continuity.
+### [gatehouse-local](https://github.com/pes1ug23am910/gatehouse-local) — credential and quota broker
+> A Windows-local API capability broker with typed MCP and CLI interfaces, DPAPI credential custody, revocable sessions and request-bound human approvals. Transactional quota reservations, idempotent usage settlement, and crash recovery that keeps uncertain usage and asynchronous job ownership across restarts.
 >
-> `Python` `Google ADK` `Gemini 2.0 Flash` `asyncio`
+> `Python` `asyncio` `FastAPI` `SQLite WAL` `MCP` `DPAPI` — 3,781 test cases per runtime on Python 3.12–3.14, reproduced by the public Windows CI
 
-### [LocalDocForge](https://github.com/pes1ug23am910/LocalDocForge)
-> Privacy-first local document processing — a typed Python core library, Typer CLI, and a token-authenticated loopback FastAPI service with Job-Object-contained workers. Structural and render validation before atomic, collision-safe publication; hash-locked dependency profiles and a reproducible-build gate. Also ships an MCP server so local agents can call it instead of hand-rolling conversion code.
+### [micro-raft](https://github.com/pes1ug23am910/micro-raft) — replicated key-value store on Raft
+> A three-crate Rust system: an I/O-free deterministic Raft core (no consensus library), a fault-injection simulator, and a durable fixed-membership three-node key-value service over Tokio/TCP with an Axum API. Nodes restore term, vote and log on restart and persist before dependent network effects; writes are acknowledged only after application, and unprovable outcomes return `outcome_unknown`.
 >
-> `Python` `FastAPI` `Typer` `pikepdf` `PDFium` — 639-outcome test suite (636 passed, 3 documented platform skips at the last gated merge), ruff + mypy, release-gated
+> `Rust` `Tokio` `TCP` `Axum` — 78 tests and a 1,000-seed soak passed (Sep 2026)
 
-## 🧪 Also building (private / local for now)
+### [LocalDocForge](https://github.com/pes1ug23am910/LocalDocForge) — local document processing
+> A local document-processing system — typed Python library, CLI, loopback API and MCP server — with 15 engine-gated capabilities, including OCR and Markdown/PDF conversion. Jobs run in fresh resource-bounded workers, and a shared pipeline validates PDF structure and rendering before atomic or collision-safe publication. No uploads, no telemetry.
+>
+> `Python` `Typer` `MCP` `pikepdf` `PDFium`
 
-- **ASCEND** — hybrid event-log/cached-projection desktop productivity RPG (Rust, Tauri 2, React, TypeScript): 11 replayable gameplay/economy projections rebuild from the append-only event log; core economy mutations pair cache and event writes in one SQLite transaction, with compensating transactional undo. **456 automated tests** (327 Rust + 129 Vitest).
-- **FocusMe** — cross-platform focus-enforcement system in Rust: Windows (WFP) backend implemented and end-to-end tested, remaining backends in progress. SQLCipher-encrypted policy store; Axum backend with JWT auth and multi-device policy sync.
-- **PromptGFM-Bio** — prompt-conditioned graph model for rare-disease gene ranking (PyTorch Geometric, frozen PubMedBERT, FiLM conditioning); manuscript in preparation.
-- **UI-Migration Capstone (Lead)** — React Native → Kotlin via a typed intermediate representation, with CodeT5+ (220M ×2) encoders; frozen-instrument exact-match reconstruction rose 17.8% → 85.6% across model versions.
+### [ASCEND](https://github.com/pes1ug23am910/ASCEND) — local-first productivity RPG
+> A Windows desktop app with atomic SQLite transactions coupling task completion, rewards and events, idempotent recurring-period settlement, and single-level compensating undo tested against state reconstructed across 11 domains.
+>
+> `Rust` `Tauri 2` `React` `TypeScript` `SQLite` — 456 tests passed (327 Rust, 129 frontend; Sep 2026)
 
-## 📄 Research & Publications
+### [Why VLMs Fail on Indic Memes](https://github.com/pes1ug23am910/Indic_VLM_Taxonomy) — research, first author
+> An evaluation pipeline and error taxonomy for GPT-4o and Gemini-2.5-Flash on 109 Hindi-English memes: 78 of 88 verified errors (88.6%) were cultural-context failures. Pre-registered on OSF (Apr 2026); manuscript in preparation.
+>
+> `Python` `Jupyter` `evaluation design`
 
-- **An Engineering-Oriented ML Decision Support System for Outcome Prediction in Dynamic Environments** — ICCEE 2026 (19th Int'l Conference on Computer & Electrical Engineering, Brisbane) · IOS Press proceedings · Paper IC-1015 · **Co-author, accepted & presented** — and **Best Presenter** award for the presentation.
+## 📄 Publications and research
+
+- **An Engineering-Oriented Machine Learning Decision Support System for Outcome Prediction in Dynamic Environments** — Detroja, **Verma**, Veena R S, Sushmitha S. *Advances in Transdisciplinary Engineering* 97, pp. 174–184, IOS Press, 2026. [DOI 10.3233/ATDE260666](https://doi.org/10.3233/ATDE260666) · **Best Presentation award**, ICCEE 2026 (Brisbane; presented online).
 - **Why VLMs Fail on Indic Memes: A Failure Taxonomy of Cultural-Knowledge Gaps** — first author · pre-registered (OSF, Apr 2026) · manuscript in preparation.
+- **PromptGFM-Bio** — phenotype-conditioned gene ranking (BiomedBERT + GraphSAGE + FiLM) over 44,195 genes; a 60-run controlled study with Holm-corrected bootstrap analysis · manuscript in preparation (code private for now).
+
+## 🧪 Other work
+
+- **React Native → Kotlin migration pipeline** (college capstone, designed and built end to end by me) — a typed intermediate representation plus a Kotlin re-encoder; 85.6% exact type match (77/90) on a frozen instrument, up from 17.8% for the first model version.
+- [**Factuality-First RAG**](https://github.com/pes1ug23am910/Factuality-First-RAG) — a modular adaptive-RAG research prototype: a retrieval gate deciding *when* to retrieve, dense and lexical retrieval, NLI passage scoring, generation, and evaluation stages. Real-model evaluation is pending.
+- [**StudyBuddy**](https://github.com/pes1ug23am910/study-buddy-final) — a console learning-assistant prototype on Google ADK: an orchestrator routing planner, tutor, quiz and progress-tracker agents.
+- [**Mini-Raft**](https://github.com/pes1ug23am910/Mini-Raft_Group_12) — a Raft mini-implementation on a Docker Compose cluster (PES University group project).
 
 ## 🏅 Achievements
 
-- **Best Presenter — ICCEE 2026**, Brisbane (co-sponsored by Central Queensland University), for the online presentation of co-authored paper IC-1015
-- **Selected — ISRO research internship**, Space Applications Centre (SAC), Ahmedabad (SRTD, May 2026); could not join due to an academic-calendar conflict
-- **Prof. MRD Scholarship** — top 5% of CS (AI-ML), Sem 1 (SGPA 9.36) · **Prof. CNR Scholarship** — top 25%, Sems 2–5
-- **Google × Kaggle 5-Day AI Agents Intensive** — multi-agent systems, tool use & orchestration (Google ADK), Nov 2025
+- **Best Presentation award** — ICCEE 2026, Brisbane, for the co-authored paper above
+- **Selected** for an ISRO research internship, Space Applications Centre (SAC), Ahmedabad (SRTD, May 2026); couldn't join because of an academic-calendar clash
+- **Prof. MRD Scholarship** — top 5% of CSE (AI-ML), Semester 1 (SGPA 9.36) · **Prof. CNR Scholarship** — top 25%, Semesters 2–5
+- **Google × Kaggle 5-Day AI Agents Intensive** — Nov 2025
 
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
 | | |
 |---|---|
-| **Languages** | Python, Rust, TypeScript, JavaScript, Kotlin, C, SQL |
-| **ML / AI** | PyTorch, PyTorch Geometric, HuggingFace Transformers, BERT / PubMedBERT, FAISS, XGBoost, Google ADK, Scikit-learn |
-| **ML Concepts** | RAG, GNNs, NLI, transfer learning, model quantization, vector search, multi-agent orchestration, evaluation design (bootstrap CIs, pre-registration) |
-| **Systems & Desktop** | Electron, Tauri 2, Node.js, React, Win32, Axum, Flask, FastAPI, PostgreSQL, REST APIs |
-| **Reliability & Testing** | Event sourcing, atomic persistence & crash recovery, IPC security boundaries, Rust / Vitest / Node / pytest testing, GitHub Actions CI/CD |
-| **Tools** | Git, Docker, Linux, Weights & Biases, Gemini / OpenAI / Anthropic APIs |
+| **Languages** | Python, Rust, C, TypeScript, JavaScript, Kotlin, SQL |
+| **Systems & testing** | Tokio, Axum, FastAPI, Tauri 2, SQLite, pytest, Vitest, Unity, libFuzzer, ASan/UBSan, GitHub Actions |
+| **Networking** | 802.11 / radiotap / EAPOL, pcap, tshark, hostapd, wpa_supplicant, mac80211_hwsim, TCP |
+| **ML / AI** | PyTorch, PyTorch Geometric, Hugging Face Transformers, FAISS, scikit-learn, Google ADK, OpenAI-compatible LLM APIs |
+| **Practices** | Crash recovery and atomic persistence, deterministic simulation, fault injection, pre-registered evaluation, bootstrap CIs |
 
 ## 📦 Earlier projects
 
-[Japanese Novel Translator](https://github.com/pes1ug23am910/japanese-novel-translator) · [Kakuyomu Translator](https://github.com/pes1ug23am910/kakuyomu-translator) · [Novel Scraper Toolkit](https://github.com/pes1ug23am910/novel-scraper-toolkit) · [Study Tracker](https://github.com/pes1ug23am910/study-tracker) · [Notion-Anki Sync](https://github.com/pes1ug23am910/notion-anki-sync) · [Habitify Dashboard](https://github.com/pes1ug23am910/habitify-dashboard) · [Python Utility Tools](https://github.com/pes1ug23am910/python-utility-tools) · [Cab Aggregator](https://github.com/pes1ug23am910/cab-aggregator-wifly)
-
-## 📊 GitHub Stats
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=pes1ug23am910&show_icons=true&theme=tokyonight)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=pes1ug23am910&layout=compact&theme=tokyonight)
+[Japanese Novel Translator](https://github.com/pes1ug23am910/japanese-novel-translator) · [Habitify Dashboard](https://github.com/pes1ug23am910/habitify-dashboard) · [Python Utility Tools](https://github.com/pes1ug23am910/python-utility-tools) · [PDF Annotation Extractor](https://github.com/pes1ug23am910/pdf-annotation-extractor) · [Notion Equation Converter](https://github.com/pes1ug23am910/notion-equation-converter) · [Cab Aggregator](https://github.com/pes1ug23am910/cab-aggregator-wifly) (team project)
 
 ## 📫 Contact
 
