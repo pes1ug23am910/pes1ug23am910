@@ -62,7 +62,7 @@ I build systems with real test suites and CI, and say plainly what they don't do
 
 ## 🛠️ Tech stack
 
-| | |
+| Area | Tools |
 |---|---|
 | **Languages** | Python, Rust, C, TypeScript, JavaScript, Kotlin, SQL |
 | **Systems & testing** | Tokio, Axum, FastAPI, Tauri 2, SQLite, pytest, Vitest, Unity, libFuzzer, ASan/UBSan, GitHub Actions |
